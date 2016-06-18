@@ -24,7 +24,7 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
     var title_analytics = ""
     @IBOutlet weak var main_title: UINavigationItem!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var reload_button: UIView!
+    @IBOutlet weak var reloadView: UIView!
     @IBOutlet weak var reloadButton: UIButton!
     
     override func viewDidLoad() {
@@ -50,12 +50,12 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
         heightConstraint.constant = 0
         self.search_t = false
         search.hidden = true
-        reload_button.hidden = true
+        reloadView.hidden = true
         view.makeToastActivityWithMessage(message: "Loading")
         dispatch_async(MyVariables.backgroundQueue, {
             if Reachability.isConnectedToNetwork() == false {
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.reload_button.hidden = false
+                    self.reloadView.hidden = false
                     self.view.hideToastActivity()
                 })
             }else{
@@ -74,20 +74,11 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
         }
         view.endEditing(true)
     }
-    
-    //    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-    //        if (scrollView.contentOffset.y < 0){
-    //            print("Reached top.")
-    //        }
-    //        if (scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height{
-    //            print("Reached bottom.")
-    //        }
-    //    }
-    
+
     @IBAction func reload(sender: UIButton) {
-        reload_button.hidden = true
+        reloadView.hidden = true
         if Reachability.isConnectedToNetwork() == false {
-            self.reload_button.hidden = false
+            self.reloadView.hidden = false
         }else{
             view.makeToastActivityWithMessage(message: "Loading")
             dispatch_async(MyVariables.backgroundQueue, {
@@ -306,7 +297,7 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
     {
         if Reachability.isConnectedToNetwork() == true {
             data = [Data]()
-            reload_button.hidden = true
+            reloadView.hidden = true
             main_title.title! = "Search"
             self.view.endEditing(true)
             let url_first = searchBar.text!
@@ -323,7 +314,7 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchBarDelega
                 })
             })
         } else {
-            reload_button.hidden = true
+            reloadView.hidden = true
             self.view.makeToast(message: "Network unavailable. Please, check your network settings and try again", duration: 2.0, position: "top")
         }
     }
