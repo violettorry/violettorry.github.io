@@ -26,7 +26,7 @@ public enum Status<Int, ApiError> {
  */
 
 struct  ApiLayerConstants {
-    static let ProvengURLHost = "proveng.cloud.provectus-it.com"
+    static let ProvengURLHost = "proveng.******.com"
     static let ProvengURLScheme = "http"
     static let ProvengURLPath = "/rest/v1/"
     static let ResultKey = "result"
