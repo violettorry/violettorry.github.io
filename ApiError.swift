@@ -1,7 +1,5 @@
-//
 //  ApiError.swift
 //  proveng
-//
 //  Created by Виктория Мацкевич on 10.07.16.
 //  Copyright © 2016 Provectus. All rights reserved.
 //
